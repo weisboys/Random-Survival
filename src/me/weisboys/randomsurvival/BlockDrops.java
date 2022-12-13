@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package me.weisboys.randomsurvival;
 
 import io.netty.util.internal.ThreadLocalRandom;
@@ -16,7 +11,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.loot.Lootable;
 
 /**
  *
@@ -24,7 +18,7 @@ import org.bukkit.loot.Lootable;
  */
 public class BlockDrops implements Listener {
     
-    Map<Material,Material> dropID = new HashMap<>();
+    private Map<Material,Material> dropID = new HashMap<>();
 
     private ToggleCommand tcmd;
     
@@ -61,6 +55,10 @@ public class BlockDrops implements Listener {
         
       
         
+    }
+    
+    public void resetMap() {
+        dropID.clear();
     }
     
 }

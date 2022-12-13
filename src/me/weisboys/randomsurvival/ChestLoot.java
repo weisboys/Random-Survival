@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package me.weisboys.randomsurvival;
 
 import io.netty.util.internal.ThreadLocalRandom;
 import java.util.Random;
-import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
