@@ -1,0 +1,20 @@
+name: SpigotTest
+version: 1.0
+api-version: 1.17
+main: me.weisboys.randomsurvival.RandomSurvival
+
+commands:
+    randomsurvival:
+        description: main command for randomsurvival
+        usage: /<command> [subcommand] ...
+        permission: randomsurvival.resetcommand
+    rstoggle:
+        description: enables/disables the plugin
+        usage: /<command>
+        permission: randomsurvival.togglecommand
+        
+permissions:
+    randomsurvival.resetcommand: 
+        description: the permission to reset random drops manually
+    randomsurvival.togglecommand:
+        description: the permission to enable/disable the plugin
