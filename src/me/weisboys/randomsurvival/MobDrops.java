@@ -33,7 +33,11 @@ public class MobDrops implements Listener{
         if (tcmd.isEnabled()){
               e.getDrops().clear();
             EntityType entityType = e.getEntity().getType();
-        
+            
+            if (entityType == EntityType.PLAYER ){
+                return;
+            }
+            
             if (!dropID.containsKey(entityType))
                 {
 

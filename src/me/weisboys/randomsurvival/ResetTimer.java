@@ -1,6 +1,7 @@
 package me.weisboys.randomsurvival;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -24,6 +25,7 @@ public class ResetTimer extends BukkitRunnable{
         if (world.getTime() < gameTime) {
             rs.getBlockDrops().resetMap();
             rs.getMobDrops().resetMap();
+            Bukkit.broadcastMessage(ChatColor.GREEN + "Drops are now reset!");
         }
         
         gameTime = world.getTime();
