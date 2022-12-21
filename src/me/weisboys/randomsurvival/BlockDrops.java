@@ -17,48 +17,43 @@ import org.bukkit.inventory.ItemStack;
  * @author weisb
  */
 public class BlockDrops implements Listener {
-    
+
     private Map<Material,Material> dropID = new HashMap<>();
 
     private ToggleCommand tcmd;
-    
+
     public BlockDrops(ToggleCommand tc) {
        tcmd = tc;
     }
-    
-    @EventHandler 
+
+    @EventHandler
     public void breakBlock (BlockBreakEvent blockBreak) {
-        
-        if (tcmd.isEnabled())
-        {
-            if ((blockBreak.getBlock().getState() instanceof Container )){
-                return;
-            }
-            
-            blockBreak.setDropItems(false);
-            Block block = blockBreak.getBlock();
-            Material blockType = block.getType();
 
-            if (!dropID.containsKey(blockType))
-            {
-
-                Random random = ThreadLocalRandom.current();
-                //Maps blockType to a random material
-                dropID.put(blockType, Material.values()[random.nextInt(Material.values().length)]); 
-            }
-
-            Material material = dropID.get(blockType);
-            ItemStack droppedItem = new ItemStack(material);
-            block.getWorld().dropItemNaturally(block.getLocation(), droppedItem);
-        
+        if (!tcmd.isEnabled()) return;
+        if (blockBreak.getBlock().getState() instanceof Container) {
+            return;
         }
-        
-      
-        
+
+        blockBreak.setDropItems(false);
+        Block block = blockBreak.getBlock();
+        Material blockType = block.getType();
+
+        if (!dropID.containsKey(blockType)) {
+            Random random = ThreadLocalRandom.current();
+            //Maps blockType to a random material
+            dropID.put(blockType, Material.values()[random.nextInt(Material.values().length)]);
+        }
+
+        Material material = dropID.get(blockType);
+        ItemStack droppedItem = new ItemStack(material);
+        block.getWorld().dropItemNaturally(block.getLocation(), droppedItem);
     }
-    
+
     public void resetMap() {
         dropID.clear();
     }
-    
+
+    public Map<Material,Material> getDropID() {
+        return dropID;
+    }
 }
