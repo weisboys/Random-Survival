@@ -18,43 +18,41 @@ import org.bukkit.inventory.ItemStack;
  */
 
 public class MobDrops implements Listener{
-    
+
      private Map<EntityType,Material> dropID = new HashMap<>();
-    
+
      private ToggleCommand tcmd;
      public MobDrops (ToggleCommand tc) {
          tcmd = tc;
      }
-     
-     
-    @EventHandler 
+
+
+    @EventHandler
     public void mobDrop (EntityDeathEvent e) {
-        
-        if (tcmd.isEnabled()){
-              e.getDrops().clear();
-            EntityType entityType = e.getEntity().getType();
-            
-            if (entityType == EntityType.PLAYER ){
-                return;
-            }
-            
-            if (!dropID.containsKey(entityType))
-                {
-
-                    Random random = ThreadLocalRandom.current();
-                    dropID.put(entityType, Material.values()[random.nextInt(Material.values().length)]); 
-                }
-
-            Material material = dropID.get(entityType);
-            ItemStack droppedItem = new ItemStack(material);
-            e.getDrops().add(droppedItem);
+        if (!tcmd.isEnabled()) {
+            return;
         }
-        
-      
+        EntityType entityType = e.getEntity().getType();
+
+        if (entityType == EntityType.PLAYER) {
+            return;
+        }
+        e.getDrops().clear();
+        if (!dropID.containsKey(entityType)) {
+            Random random = ThreadLocalRandom.current();
+            dropID.put(entityType, Material.values()[random.nextInt(Material.values().length)]);
+        }
+
+        Material material = dropID.get(entityType);
+        ItemStack droppedItem = new ItemStack(material);
+        e.getDrops().add(droppedItem);
     }
-    
+
     public void resetMap() {
         dropID.clear();
     }
-    
+
+    public Map<EntityType,Material> getDropID() {
+        return dropID;
+    }
 }
