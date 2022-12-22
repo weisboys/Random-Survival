@@ -12,9 +12,15 @@ commands:
         description: enables/disables the plugin
         usage: /<command>
         permission: randomsurvival.togglecommand
-        
+    rsnotify:
+        description: Enables/disables notification of new mappings
+        usage: /<command>
+        permission: randomsurvival.notifycommand
+
 permissions:
     randomsurvival.resetcommand: 
         description: the permission to reset random drops manually
     randomsurvival.togglecommand:
         description: the permission to enable/disable the plugin
+    randomsurvival.notifycommand:
+        description: The permission to enable/disable notifications

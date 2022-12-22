@@ -1,12 +1,17 @@
 package me.weisboys.randomsurvival;
 
 import io.netty.util.internal.ThreadLocalRandom;
+import net.md_5.bungee.api.ChatColor;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Container;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -21,9 +26,11 @@ public class BlockDrops implements Listener {
     private Map<Material,Material> dropID = new HashMap<>();
 
     private ToggleCommand tcmd;
+    private NotifyCommand ncmd;
 
-    public BlockDrops(ToggleCommand tc) {
+    public BlockDrops(ToggleCommand tc, NotifyCommand nc) {
        tcmd = tc;
+       ncmd = nc;
     }
 
     @EventHandler
@@ -42,6 +49,11 @@ public class BlockDrops implements Listener {
             Random random = ThreadLocalRandom.current();
             //Maps blockType to a random material
             dropID.put(blockType, Material.values()[random.nextInt(Material.values().length)]);
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (ncmd.isNotificationsEnabled(player)) {
+                    player.sendMessage(ChatColor.GREEN + "New discovery: " + blockType.toString() + " -> " + dropID.get(blockType).toString());
+                }
+            }
         }
 
         Material material = dropID.get(blockType);

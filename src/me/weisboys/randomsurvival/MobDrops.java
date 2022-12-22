@@ -1,11 +1,16 @@
 package me.weisboys.randomsurvival;
 
 import io.netty.util.internal.ThreadLocalRandom;
+import net.md_5.bungee.api.ChatColor;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -22,8 +27,10 @@ public class MobDrops implements Listener{
      private Map<EntityType,Material> dropID = new HashMap<>();
 
      private ToggleCommand tcmd;
-     public MobDrops (ToggleCommand tc) {
+     private NotifyCommand ncmd;
+     public MobDrops (ToggleCommand tc, NotifyCommand nc) {
          tcmd = tc;
+         ncmd = nc;
      }
 
 
@@ -41,6 +48,11 @@ public class MobDrops implements Listener{
         if (!dropID.containsKey(entityType)) {
             Random random = ThreadLocalRandom.current();
             dropID.put(entityType, Material.values()[random.nextInt(Material.values().length)]);
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (ncmd.isNotificationsEnabled(player)) {
+                    player.sendMessage(ChatColor.GREEN + "New discovery: " + entityType.toString() + " -> " + dropID.get(entityType).toString());
+                }
+            }
         }
 
         Material material = dropID.get(entityType);
