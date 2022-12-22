@@ -51,7 +51,7 @@ public class BlockDrops implements Listener {
             dropID.put(blockType, Material.values()[random.nextInt(Material.values().length)]);
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (ncmd.isNotificationsEnabled(player)) {
-                    player.sendMessage(ChatColor.GREEN + "New discovery: " + ChatColor.DARK_AQUA + blockType.toString() + ChatColor.GREEN + " -> " + ChatColor.AQUA + dropID.get(blockType).toString());
+                    player.sendMessage(ChatColor.YELLOW + "[" + ChatColor.LIGHT_PURPLE + "RandomSurvival" + ChatColor.YELLOW + "]" + ChatColor.GREEN + "New discovery: " + ChatColor.DARK_AQUA + blockType.toString() + ChatColor.GREEN + " -> " + ChatColor.AQUA + dropID.get(blockType).toString());
                 }
             }
         }
