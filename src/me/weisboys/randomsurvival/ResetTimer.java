@@ -25,7 +25,7 @@ public class ResetTimer extends BukkitRunnable{
         if (world.getTime() < gameTime) {
             rs.getBlockDrops().resetMap();
             rs.getMobDrops().resetMap();
-            Bukkit.broadcastMessage(ChatColor.GREEN + "Drops are now reset!");
+            Bukkit.broadcastMessage(ChatColor.GREEN + "Random drops are now reset!");
         }
         
         gameTime = world.getTime();

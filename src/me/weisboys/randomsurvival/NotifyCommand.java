@@ -28,11 +28,11 @@ public class NotifyCommand implements TabExecutor {
         }
         Player player = (Player) sender;
         if (players.remove(player.getUniqueId())) {
-            player.sendMessage(ChatColor.RED + "Notifications disabled");
+            player.sendMessage(ChatColor.GREEN + "Random discovery notifications " + ChatColor.RED + "disabled");
             return true;
         }
         players.add(player.getUniqueId());
-        player.sendMessage(ChatColor.RED + "Notifications enabled");
+        player.sendMessage(ChatColor.GREEN + "Random discovery notifications " + ChatColor.YELLOW + "enabled");
         return true;
     }
 

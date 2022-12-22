@@ -27,11 +27,11 @@ public class ToggleCommand implements TabExecutor{
         if(enabled)
         {
             enabled = false;
-            cs.sendMessage(ChatColor.GREEN + "RandomSurvival disabled!");
+            cs.sendMessage(ChatColor.GREEN + "RandomSurvival " + ChatColor.RED + "disabled");
         }
         else {
             enabled = true;
-            cs.sendMessage(ChatColor.GREEN + "RandomSurvival enabled!");
+            cs.sendMessage(ChatColor.GREEN + "RandomSurvival " + ChatColor.YELLOW + "enabled");
         }
         return true;
     }
