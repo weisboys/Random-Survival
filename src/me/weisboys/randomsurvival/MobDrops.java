@@ -50,7 +50,7 @@ public class MobDrops implements Listener{
             dropID.put(entityType, Material.values()[random.nextInt(Material.values().length)]);
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (ncmd.isNotificationsEnabled(player)) {
-                    player.sendMessage(ChatColor.YELLOW + "[" + ChatColor.LIGHT_PURPLE + "RandomSurvival" + ChatColor.YELLOW + "]" + ChatColor.GREEN + "New discovery: " + ChatColor.DARK_AQUA + entityType.toString() + ChatColor.GREEN + " -> " + ChatColor.AQUA + dropID.get(entityType).toString());
+                    player.sendMessage(ChatColor.GREEN + "New discovery: " + ChatColor.DARK_AQUA + entityType.toString() + ChatColor.GREEN + " -> " + ChatColor.AQUA + dropID.get(entityType).toString());
                 }
             }
         }
