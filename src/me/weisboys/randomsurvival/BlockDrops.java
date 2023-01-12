@@ -1,16 +1,17 @@
 package me.weisboys.randomsurvival;
 
-import io.netty.util.internal.ThreadLocalRandom;
 import net.md_5.bungee.api.ChatColor;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Container;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,10 +28,12 @@ public class BlockDrops implements Listener {
 
     private ToggleCommand tcmd;
     private NotifyCommand ncmd;
+    private boolean st;
 
-    public BlockDrops(ToggleCommand tc, NotifyCommand nc) {
+    public BlockDrops(ToggleCommand tc, NotifyCommand nc, boolean st) {
        tcmd = tc;
        ncmd = nc;
+       this.st = st;
     }
 
     @EventHandler
@@ -38,6 +41,9 @@ public class BlockDrops implements Listener {
 
         if (!tcmd.isEnabled()) return;
         if (blockBreak.getBlock().getState() instanceof Container) {
+            return;
+        }
+        if (st && blockBreak.getPlayer().getInventory().getItemInMainHand().containsEnchantment(Enchantment.SILK_TOUCH)) {
             return;
         }
 

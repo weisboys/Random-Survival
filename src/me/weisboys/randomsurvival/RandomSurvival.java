@@ -14,9 +14,14 @@ public class RandomSurvival extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable (){
+
+        saveDefaultConfig();
+
+        boolean respectSilkTouch = getConfig().getBoolean("RespectSilkTouch",true);
+
         ToggleCommand tc = new ToggleCommand();
         NotifyCommand nc = new NotifyCommand();
-        bd = new BlockDrops(tc, nc);
+        bd = new BlockDrops(tc, nc, respectSilkTouch);
         md = new MobDrops(tc, nc);
         ResetTimer rt = new ResetTimer(this);
 
